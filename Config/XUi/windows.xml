@@ -1,0 +1,6 @@
+﻿<configs>
+	<setattribute xpath="/windows/window[@name='windowPowerTrapSlots']/rect[@name='content']/grid[@name='inventory']"
+		name="controller">XUI_PowerRangedAmmoSlots, RemoteTurretControl</setattribute>
+	<setattribute xpath="/windows/window[@name='windowPowerTrapSlots']/rect[@name='btnOn']"
+		name="visible">{isLocal}</setattribute>
+</configs>
