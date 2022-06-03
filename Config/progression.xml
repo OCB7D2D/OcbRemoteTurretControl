@@ -1,0 +1,9 @@
+<configs>
+
+	<append xpath="/progression/perks/perk[@name='perkTurrets']/effect_group">
+
+		<passive_effect name="RecipeTagUnlocked" operation="base_set" level="4,5" value="1" tags="ocbRemoteTurretPanelVariantHelper"/>
+
+	</append>
+
+</configs>

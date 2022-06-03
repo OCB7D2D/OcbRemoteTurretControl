@@ -1,0 +1,16 @@
+<configs>
+	<setattribute xpath="/xui/ruleset[@name='default']/window_group[@name='powerrangedtrap']"
+		name="controller">XUI_PowerRangedTrapWindowGroup, RemoteTurretControl</setattribute>
+	<setattribute xpath="/xui/ruleset[@name='default']/window_group[@name='powercamera']"
+		name="controller">XUI_PowerCameraWindowGroup, RemoteTurretControl</setattribute>
+
+	<append xpath="/xui/ruleset[@name='default']">
+		<window_group name="remoteturret" controller="XUI_PowerRemoteTurretPanel, RemoteTurretControl"
+				open_backpack_on_open="true" close_compass_on_open="true">
+			<window name="windowPowerRangedTrapOptions" />
+			<window name="windowPowerTrapSlots" />
+			<window name="windowPowerCameraControlPreview" />
+			<window name="windowNonPagingHeader" />
+		</window_group>
+	</append>
+</configs>
