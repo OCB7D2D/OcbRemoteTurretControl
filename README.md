@@ -159,6 +159,10 @@ Further away you may only get an update each 1 or 2 seconds.
 
 ## Changelog
 
+### Version 0.1.1
+
+- Fix models (missed MRO texture)
+
 ### Version 0.1.0
 
 - Initial working version
