@@ -1,0 +1,34 @@
+<configs patcher-version="1">
+
+	<append xpath="/blocks/block[@name='ocbRemoteTurretPanelBase']">
+
+		<property name="UnlockedBy" value="ocbRemoteTurretPanelBlueprint"/>
+
+		<property name="CarryWeight" value="10"/>
+		<property name="Stacknumber" value="5"/>
+
+		<property class="RepairItems">
+			<property name="resourceForgedSteel" value="10" />
+			<property name="resourceElectricParts" value="6" />
+		</property>
+
+		<property name="MaxDamage" value="3000" />
+
+		<drop event="Harvest" name="air" count="0" tool_category="Disassemble"/>
+		<drop event="Harvest" name="resourceElectricParts" count="0,6" prob="0.2" tag="allHarvest" />
+		<drop event="Harvest" name="ulmResourceScrapSteel" count="8,24" prob="0.4" tag="allHarvest" />
+		<drop event="Harvest" name="ulmResourceScrapSteel" count="16,32" prob="0.8" tag="salvageHarvest" />
+		<drop event="Fall" name="scrapMetalPile" count="1" prob="0.75" stick_chance="1"/>
+		<drop event="Destroy" count="0"/>
+
+		<!-- Optional perks to unlock remote maintenance of certain ammo types -->
+		<property name="AmmoPerks" value="ulmTurretAmmoSMGMaster,ulmTurretAmmoShotgunMaster"/>
+		<!-- Note: must start lowercase to match actual ammo type -->
+		<property name="ulmTurretAmmoSMGMasterPerk" value="perkMachineGunner"/>
+		<property name="ulmTurretAmmoSMGMasterPerkLevel" value="3"/>
+		<property name="ulmTurretAmmoShotgunMasterPerk" value="perkBoomstick"/>
+		<property name="ulmTurretAmmoShotgunMasterPerkLevel" value="3"/>
+
+	</append>
+
+</configs>

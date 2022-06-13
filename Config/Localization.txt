@@ -4,6 +4,7 @@ ocbRemoteTurretPanelMumpfy,blocks,Block,Turret Remote-Control,Turret Fernsteueru
 ocbRemoteTurretPanelGuppy,blocks,Block,Turret Remote-Control,Turret Fernsteuerung
 ocbRemoteTurretPanelVariantHelperDesc,blocks,Block,"Control multiple turrets remotely. Connect turrets downstream to the control panel (up to 5 level) and use A/D to switch between turrets when control panel is open.","Kontrolliere mehrere Turrets aus der Ferne. Verbinde Turrets mit dem Kontrol Panel (bis zu 5 Ebenen tief) und Drücke A/D um zwischen den Turrets zu wechseln wenn das Optionen Fenster offen ist."
 ocbRemoteTurretPanelSchematic,items,Turret,Turret Remote-Control Schematic,Bauplan - Turret Fernsteuerung
+ocbRemoteTurretPanelBlueprint,items,item,Turret Remote-Control,Turret Fernsteuerung
 ttNoTurretConnected,UI,Tooltip,No turrets connected or active.,Keine Turrets verbunden oder aktiv.
 ttAmmoLocked,UI,Tooltip,Remote maintenance not unlocked yet.,Fernwartung noch nicht freigeschaltet.
 ttAllTurretsInUse,UI,Tooltip,All turrets are in use.,Kein verfügbares Turret gefunden.

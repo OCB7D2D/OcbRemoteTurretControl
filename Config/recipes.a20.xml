@@ -1,0 +1,17 @@
+<configs patcher-version="1">
+
+	<append xpath="/recipes">
+
+		<recipe name="ocbRemoteTurretPanelVariantHelper" count="1"
+				tags="perkTurrets,learnable"
+				craft_area="workbench" material_based="false"
+				craft_time="180">
+			<ingredient name="resourceForgedSteel" count="20"/>
+			<ingredient name="resourceElectricParts" count="10"/>
+			<ingredient name="gunBotRoboticsParts" count="2"/>
+			<ingredient name="tv" count="1"/>
+		</recipe>
+
+	</append>
+
+</configs>

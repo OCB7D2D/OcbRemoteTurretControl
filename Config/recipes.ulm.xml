@@ -1,0 +1,36 @@
+<configs patcher-version="1">
+
+	<append xpath="/recipes">
+
+		<recipe name="ocbRemoteTurretPanelBlueprint" time="60" area="ulmStationResearch_1">
+			<ingredient name="resourceForgedSteel" count="10"/>
+			<ingredient name="resourceElectricParts" count="4"/>
+			<ingredient name="ulmResourceScrapWires" count="2"/>
+			<ingredient name="ulmResourceNutsAndBolts" count="6"/>
+			<ingredient name="ulmBlockTVVariantHelper" count="1"/>
+			<ingredient name="ulmResourceResearch" count="100"/>
+			<ingredient name="resourcePaper" count="10"/>
+		</recipe>
+
+		<recipe name="ocbRemoteTurretPanelVariantHelper" time="30"
+			tags="learnable" area="ulmStationWorkbench_2">
+
+			<ingredient name="resourceForgedSteel" count="20"/>
+			<ingredient name="resourceElectricParts" count="8"/>
+			<ingredient name="ulmResourceScrapWires" count="4"/>
+			<ingredient name="ulmResourceNutsAndBolts" count="12"/>
+			<ingredient name="ulmBlockTVVariantHelper" count="1"/>
+			<ingredient name="ulmResourceElectronicCircuitboard"/>
+			<ingredient name="ulmResourceElectronicFuse"/>
+			<ingredient name="ulmResourceElectronicSwitch"/>
+
+			<effect_group>
+				<passive_effect name="CraftingIngredientCount" level="0,1,2,3,4" operation="perc_add"
+					value=".5,.5,.5,.3,.15" tags="resourceForgedSteel,resourceElectricParts,ulmResourceScrapWires,ulmResourceNutsAndBolts"/>
+			</effect_group>
+
+		</recipe>
+
+	</append>
+		
+</configs>

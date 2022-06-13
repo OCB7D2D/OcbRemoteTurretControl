@@ -1,6 +1,14 @@
-﻿<configs>
-	<setattribute xpath="/windows/window[@name='windowPowerTrapSlots']/rect[@name='content']/grid[@name='inventory']"
-		name="controller">XUI_PowerRangedAmmoSlots, RemoteTurretControl</setattribute>
-	<setattribute xpath="/windows/window[@name='windowPowerTrapSlots']/rect[@name='btnOn']"
-		name="visible">{isLocal}</setattribute>
+﻿<configs patcher-version="1">
+
+	<modif condition="UndeadLegacy_CoreModule">
+		<setattribute xpath="/windows/window[@name='windowPowerTrapSlots']//rect[@name='btnOn']"
+			name="visible">{isLocal}</setattribute>
+	</modif>
+	<modelse>
+		<!-- <setattribute xpath="/windows/window[@name='windowPowerTrapSlots']/rect[@name='content']/grid[@name='inventory']"
+			name="controller">XUI_PowerRangedAmmoSlots, RemoteTurretControl</setattribute> -->
+		<setattribute xpath="/windows/window[@name='windowPowerTrapSlots']/rect[@name='btnOn']"
+			name="visible">{isLocal}</setattribute>
+	</modelse>
+
 </configs>

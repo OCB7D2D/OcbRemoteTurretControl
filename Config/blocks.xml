@@ -2,59 +2,48 @@
 
 	<append xpath="/blocks">
 
-		<block name="ocbRemoteTurretPanelMumpfy">
-
-			<property name="Extends" value="controlPanelBase04"/>
+		<block name="ocbRemoteTurretPanelBase">
+			<property name="CreativeMode" value="None"/>
+			<property name="Class" value="RemoteTurret, RemoteTurretControl"/>
+			<property name="ReturnVariantHelper" value="ocbRemoteTurretPanelVariantHelper"/>
+			<property name="Tags" value="MC_playerBlocks,SC_electrical"/>
+			<property name="StabilitySupport" value="false"/>
+			<property name="IsTerrainDecoration" value="false"/>
+			<property name="Group" value="Electrical,Powered,Blocks"/>
+			<property name="Collide" value="movement,melee,bullet,arrow,rocket"/>
+			<property name="DescriptionKey" value="ocbRemoteTurretPanelVariantHelperDesc"/>
+			<property name="DisplayType" value="blockElectricalHardened"/>
+			<property name="Place" value="TowardsPlacerInverted"/>
+			<property name="OnlySimpleRotations" value="false"/>
+			<property name="ImposterDontBlock" value="true"/>
+			<property name="ActivationDistance" value="6"/>
+			<property name="EconomicBundleSize" value="1"/>
+			<property name="FilterTags" value="floot"/>
+			<property name="CanPickup" value="true" />
+			<property name="TakeDelay" value="30"/>
+			<property name="Material" value="Msteel" />
+			<property name="EconomicValue" value="200" />
 			<property name="CustomIconTint" value="FFFFFF"/>
 			<property name="TintColor" value="FFFFFF"/>
-
 			<property name="RequiredPower" value="20"/>
 			<property name="Stacknumber" value="5"/>
+			<property name="SortOrder1" value="70e3"/>
+		</block>
 
-			<property name="CreativeMode" value="Player"/>
-			<property name="Tags" value="safes,hardenedSafe"/>
-			<property name="Class" value="RemoteTurret, RemoteTurretControl"/>
-			<property name="DescriptionKey" value="ocbRemoteTurretPanelVariantHelperDesc"/>
-			<property name="ReturnVariantHelper" value="ocbRemoteTurretPanelVariantHelper"/>
-			<property name="UnlockedBy" value="perkTurrets,ocbRemoteTurretPanelSchematic"/>
+		<block name="ocbRemoteTurretPanelMumpfy">
+
 			<property name="Shape" value="ModelEntity" />
-
-			<property name="Weight" value="30"/>
-			<property name="Material" value="Msteel" />
-
-			<property class="RepairItems">
-				<property name="resourceForgedSteel" value="20" />
-				<property name="resourceElectricParts" value="10" />
-			</property>
-			<property name="MaxDamage" value="3000" />
-			<drop event="Harvest" name="resourceElectricParts" count="0,6" prob="0.2" tag="allHarvest" />
-			<drop event="Harvest" name="resourceForgedSteel" count="2,8" prob="0.4" tag="allHarvest" />
-			<drop event="Harvest" name="resourceForgedSteel" count="4,8" prob="0.8" tag="salvageHarvest" />
-			<drop event="Fall" name="scrapMetalPile" count="1" prob="0.75" stick_chance="1"/>
-			<drop event="Destroy" count="0"/>
-
-			<property name="StabilitySupport" value="false"/>
-
-			<property name="EconomicValue" value="200" />
-
-			<property name="DisplayType" value="blockMulti"/>
-			<property name="MultiBlockDim" value="1,2,1"/>
-		
+			<property name="CreativeMode" value="Player"/>
+			<property name="Extends" value="ocbRemoteTurretPanelBase"/>
 			<property name="CustomIcon" value="RemoteTurretPanelMumpfy" />
 			<property name="Model" value="#@modfolder:Resources/RemoteTurretPanels.unity3d?RemoteTurretMumpfy" />
+			<property name="DisplayType" value="blockMulti"/>
+			<property name="MultiBlockDim" value="1,2,1"/>
 
 			<!-- Lock mode for connected turrets when opened  -->
 			<!-- Either lock when switching or lock all on open -->
 			<!-- option `false` not much tested in multiplayer! -->
 			<property name="ScreenLockSingle" value="true"/>
-
-			<!-- Optional perks to unlock remote maintenance of certain ammo types -->
-			<property name="AmmoPerks" value="ammo9mmBulletBall,ammoShotgunShell"/>
-			<!-- Note: must start lowercase to match actual ammo type -->
-			<property name="ammo9mmBulletBallPerk" value="perkMachineGunner"/>
-			<property name="ammo9mmBulletBallPerkLevel" value="3"/>
-			<property name="ammoShotgunShellPerk" value="perkBoomstick"/>
-			<property name="ammoShotgunShellPerkLevel" value="3"/>
 
 			<!-- Interval to switch cams in CCTV mode -->
 			<property name="ScreenCameraInterval" value="3"/>
@@ -91,10 +80,14 @@
 
 		<block name="ocbRemoteTurretPanelGuppy">
 
+			<property name="Shape" value="ModelEntity" />
+			<property name="CreativeMode" value="Player"/>
 			<property name="Extends" value="ocbRemoteTurretPanelMumpfy"/>
-
+			<property name="CustomIcon" value="RemoteTurretPanelGuppy" />
+			<property name="Model" value="#@modfolder:Resources/RemoteTurretPanels.unity3d?RemoteTurretGuppy" />
+			<property name="DisplayType" value="blockMulti"/>
+			<property name="MultiBlockDim" value="1,2,1"/>
 			<property name="ScreenShownWhen" value="Parented"/>
-
 			<property name="ScreenAlbedoColor" value="120,230,230,30"/>
 			<property name="ScreenEmissionColor" value="20,35,35,255"/>
 			<property name="ScreenAlbedoColorOn" value="80,140,140,220"/>
@@ -104,8 +97,6 @@
 			<property name="ScreenAlbedoColorEffect" value="80,140,140,220"/>
 			<property name="ScreenEmissionColorEffect" value="80,140,140,120"/>
 
-			<property name="CustomIcon" value="RemoteTurretPanelGuppy" />
-			<property name="Model" value="#@modfolder:Resources/RemoteTurretPanels.unity3d?RemoteTurretGuppy" />
 		</block>
 
 		<block name="ocbRemoteTurretPanelVariantHelper">
@@ -119,5 +110,12 @@
 		</block>
 
 	</append>
+
+	<modif condition="UndeadLegacy_CoreModule">
+		<include path="blocks.ulm.xml"/>
+	</modif>
+	<modelse>
+		<include path="blocks.a20.xml"/>
+	</modelse>
 
 </configs>
