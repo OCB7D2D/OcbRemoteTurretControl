@@ -11,6 +11,13 @@ using UnityEngine;
 static class NetServerAction
 {
 
+    // White-list methods that are allowed to be called
+    // Otherwise opens it for arbitrary remote code execution
+    static readonly HashSet<string> AllowedFunctions = new HashSet<string>
+    {
+        "XUI_PowerRemoteTurretPanel:LockForClient"
+    };
+
     // Wrap-around should be fairly seldom
     // This is handled client-side, by the way
     static int RequestID = int.MinValue;
@@ -94,6 +101,8 @@ static class NetServerAction
             var types = new Type[args.Length];
             for (var i = 0; i < args.Length; i++)
                 types[i] = args[i].GetType();
+            if (!AllowedFunctions.Contains(fqfn)) throw new Exception(
+                 "Method not white-listed " + fqfn);
             MethodInfo method = AccessTools.Method(fqfn, types);
             if (method == null) throw new Exception(
                 "Static method not found " + fqfn);
