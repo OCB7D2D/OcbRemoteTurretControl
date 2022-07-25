@@ -159,6 +159,11 @@ Further away you may only get an update each 1 or 2 seconds.
 
 ## Changelog
 
+### Version 0.1.2
+
+- Fix issue with motion sensors when closing camera view
+- Tighten NetServerAction to only allow a list of functions
+
 ### Version 0.1.1
 
 - Fix models (missed MRO texture)

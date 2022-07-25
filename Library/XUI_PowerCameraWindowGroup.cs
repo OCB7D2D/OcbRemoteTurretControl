@@ -5,11 +5,17 @@ public class XUI_PowerCameraWindowGroup : XUiC_PowerCameraWindowGroup
 {
     public override void OnClose()
     {
-        string group = XUiC_CameraWindow.lastWindowGroup;
-        XUiC_CameraWindow.lastWindowGroup = "powerrangedtrap";
-        base.OnClose(); // Fixing TileEntity update
-        XUiC_CameraWindow.lastWindowGroup = group;
-        // Harmony patch in GUIWindowManager.Open
+        if (XUiC_CameraWindow.lastWindowGroup == "remoteturret")
+        {
+            // Let code below act as if we are a "powerrangedtrap"
+            XUiC_CameraWindow.lastWindowGroup = "powerrangedtrap";
+            base.OnClose(); // Fixing TileEntity update
+            XUiC_CameraWindow.lastWindowGroup = "remoteturret";
+        }
+        else
+        {
+            base.OnClose();
+        }
     }
     public override void Update(float _dt)
     {
