@@ -9,7 +9,10 @@ public class XUI_PowerCameraWindowGroup : XUiC_PowerCameraWindowGroup
         {
             // Let code below act as if we are a "powerrangedtrap"
             XUiC_CameraWindow.lastWindowGroup = "powerrangedtrap";
+            float previous = Constants.cDigAndBuildDistance;
+            Constants.cDigAndBuildDistance = float.MaxValue;
             base.OnClose(); // Fixing TileEntity update
+            Constants.cDigAndBuildDistance = previous;
             XUiC_CameraWindow.lastWindowGroup = "remoteturret";
         }
         else

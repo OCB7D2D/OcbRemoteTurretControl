@@ -159,6 +159,11 @@ Further away you may only get an update each 1 or 2 seconds.
 
 ## Changelog
 
+### Version 0.1.3
+
+- Fix issue when opening a turret too far away
+  Base code insisted to close parent window too
+
 ### Version 0.1.2
 
 - Fix issue with motion sensors when closing camera view
