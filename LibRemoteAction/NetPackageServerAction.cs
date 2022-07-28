@@ -45,6 +45,8 @@ class NetPackageServerAction : NetPackage
         var types = new Type[args.Length];
         for (var i = 0; i < args.Length; i++)
             types[i] = args[i].GetType();
+        if (!NetServerAction.AllowedFunctions.Contains(fqfn))
+            throw new Exception("Method not white-listed " + fqfn);
         MethodInfo method = AccessTools.Method(fqfn, types);
         if (method == null) throw new Exception("Method not found " + fqfn);
         if (!method.IsStatic) throw new Exception("Only Static methods allowed " + fqfn);

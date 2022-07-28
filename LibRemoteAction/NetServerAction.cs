@@ -13,7 +13,7 @@ static class NetServerAction
 
     // White-list methods that are allowed to be called
     // Otherwise opens it for arbitrary remote code execution
-    static readonly HashSet<string> AllowedFunctions = new HashSet<string>
+    public static readonly HashSet<string> AllowedFunctions = new HashSet<string>
     {
         "XUI_PowerRemoteTurretPanel:LockForClient"
     };
@@ -95,14 +95,14 @@ static class NetServerAction
         Action<object> success, Action<object> error, Action abort,
         int entityId = -1, int timeout = -1)
     {
+        if (!NetServerAction.AllowedFunctions.Contains(fqfn))
+            throw new Exception("Method not white-listed " + fqfn);
         // We can execute it directly on the server
         if (ConnectionManager.Instance.IsServer)
         {
             var types = new Type[args.Length];
             for (var i = 0; i < args.Length; i++)
                 types[i] = args[i].GetType();
-            if (!AllowedFunctions.Contains(fqfn)) throw new Exception(
-                 "Method not white-listed " + fqfn);
             MethodInfo method = AccessTools.Method(fqfn, types);
             if (method == null) throw new Exception(
                 "Static method not found " + fqfn);
