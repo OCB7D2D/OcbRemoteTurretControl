@@ -29,19 +29,22 @@
     SubShader
     {
         Tags {
-            "Queue" = "Transparent"
+            "Queue" = "AlphaTest+2"
             "IgnoreProjector" = "True"
-            "RenderType" = "Transparent"
+            "RenderType" = "Opaque"
             "PreviewType" = "Plane"
         }
-        Blend One OneMinusSrcAlpha
+
+        // Blend SrcAlpha OneMinusSrcAlpha, SrcAlpha OneMinusSrcAlpha
+        Blend One OneMinusSrcAlpha, SrcAlpha OneMinusSrcAlpha
+
         LOD 200
 
         cull off
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
         // Also enabling alpha in order to get transparency working
-        #pragma surface surf Standard fullforwardshadows alpha:premul
+        #pragma surface surf Standard fullforwardshadows
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
         // Include the actual surface shader

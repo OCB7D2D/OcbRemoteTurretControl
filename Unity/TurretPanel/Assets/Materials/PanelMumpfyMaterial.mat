@@ -2,16 +2,19 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: PanelMumpfyMaterial
   m_Shader: {fileID: 4800000, guid: 3ccb74c119690024b9f98a4edbf50876, type: 3}
-  m_ShaderKeywords: _EMISSION _NORMALMAP
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _EMISSION
+  - _NORMALMAP
   m_LightmapFlags: 1
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -63,6 +66,7 @@ Material:
         m_Texture: {fileID: 2800000, guid: f125f674f6156f64babf2b544485b181, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Alpha: 1
     - _BumpScale: 0.25
@@ -73,13 +77,13 @@ Material:
     - _EmissionOpacity: 0.996
     - _FakeThickness: 0.5
     - _GlossMapScale: 1
-    - _Glossiness: 0.65
+    - _Glossiness: 1
     - _GlossyReflections: 1
     - _LabelGlossiness: 0.5
     - _LabelMetallic: 0
-    - _Metallic: 0.9
+    - _Metallic: 0.75
     - _Mode: -0.4
-    - _Occlusion: 0.8
+    - _Occlusion: 0.75
     - _OcclusionStrength: 0.8
     - _Parallax: 0.02
     - _Roughness: 1
@@ -90,7 +94,7 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.7529412, g: 0.7529412, b: 0.7529412, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 1}
     - _ThickColor: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

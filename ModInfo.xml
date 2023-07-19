@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <xml>
-	<ModInfo>
-		<Name value="OcbRemoteTurretControl" />
-		<Description value="Connect to turrets remotely" />
-		<Website value="https://github.com/OCB7D2D/OcbRemoteTurretControl" />
-		<Author value="ocbMaurice" />
-		<Version value="0.1.3" compat="A20"/>
-	</ModInfo>
+	<Name value="OcbRemoteTurretControl" />
+	<DisplayName value="OCB Remote Turret Control and CCTV" />
+	<Description value="Connect and control remote turrets and view their cameras" />
+	<Website value="https://github.com/OCB7D2D/OcbRemoteTurretControl" />
+	<Author value="ocbMaurice" />
+	<Version value="0.2.0" />
 </xml>

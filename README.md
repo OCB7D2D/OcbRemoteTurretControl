@@ -1,4 +1,4 @@
-# OCB Remote Turret Control Mod - 7 Days to Die (A20) Addon
+# OCB Remote Turret Control Mod - 7 Days to Die (A21) Addon
 
 Introduces a new control panel block that connects with powered turrets.
 Once the control panel is opened, you can switch between turrets.
@@ -146,9 +146,9 @@ We need something a bit more sophisticated!
 
 ### Secondary camera frame limiter
 
-The basic issue is quite simple, we have a list of camera that want
+The basic issue is quite simple, we have a list of cameras that want
 to render as often as possible but still play nicely if needed. So
-instead of trying to limit each one on it's own, we introduced
+instead of trying to limit each one on its own, we introduced
 another manager. This one will make sure that basically only one
 other render call is made per frame update.
 
@@ -158,6 +158,10 @@ frequently. When very close, up to same fps as the main game runs.
 Further away you may only get an update each 1 or 2 seconds.
 
 ## Changelog
+
+### Version 0.2.0
+
+- Update compatibility for 7D2D A21.0(b324)
 
 ### Version 0.1.3
 
@@ -179,4 +183,4 @@ Further away you may only get an update each 1 or 2 seconds.
 
 ## Compatibility
 
-I've developed and tested this Mod against version a20.5 (b2)
+Developed initially for version a20.5(b2), updated through A21.0(b324).

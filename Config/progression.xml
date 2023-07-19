@@ -1,9 +1,13 @@
 <configs>
+	<setattribute xpath="/progression/crafting_skills/crafting_skill[@name='craftingTraps']" name="max_level">100</setattribute>
 
-	<append xpath="/progression/perks/perk[@name='perkTurrets']/effect_group">
+	<insertafter xpath="/progression/crafting_skills/crafting_skill[@name='craftingTraps']/display_entry[@name_key='trapsT3']">
+		<display_entry icon="ocbRemoteTurretPanelMumpfy" name_key="ocbRemoteTurretPanelT4" has_quality="false" unlock_level="100">
+			<unlock_entry item="ocbRemoteTurretPanelVariantHelper" unlock_tier="1"/>
+		</display_entry>
+	</insertafter>
 
-		<passive_effect name="RecipeTagUnlocked" operation="base_set" level="4,5" value="1" tags="ocbRemoteTurretPanelVariantHelper"/>
-
+	<append xpath="/progression/crafting_skills/crafting_skill[@name='craftingTraps']/effect_group">
+		<passive_effect name="RecipeTagUnlocked" operation="base_set" level="100,100" value="1" tags="ocbRemoteTurretPanelVariantHelper"/>
 	</append>
-
 </configs>

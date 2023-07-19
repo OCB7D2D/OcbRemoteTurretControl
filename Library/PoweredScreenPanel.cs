@@ -15,6 +15,9 @@ public abstract class PoweredScreenPanel : IThrottleCam
     // Will be reset to `UpdateInterval`
     private int FramesToWait = 0;
 
+    // Last render time to prioritize
+    public float LastRendered { get; set; }
+
     // Options when to show screen
     public enum ShowScreen 
     {
@@ -216,6 +219,7 @@ public abstract class PoweredScreenPanel : IThrottleCam
     public void WasRenderedThisFrame()
     {
         FramesToWait = UpdateInterval;
+        LastRendered = Time.time;
     }
 
 }

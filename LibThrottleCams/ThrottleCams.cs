@@ -9,7 +9,7 @@ static class ThrottleCams
 
 	// We use a list here since we don't expect too many cameras at once
 	// Adding and removing will get bad once you get into the 100s
-    public static List<IThrottleCam> Cameras = new List<IThrottleCam>();
+	public static List<IThrottleCam> Cameras = new List<IThrottleCam>();
 
 	// Maximum number of cams rendered per frame
 	// Limits the maximum pressure on the GPU
@@ -21,15 +21,18 @@ static class ThrottleCams
 	{
 		int rendered = 0;
 		if (Cameras == null) return;
-        World world = GameManager.Instance.World;
+		World world = GameManager.Instance.World;
 		if (world == null || world.m_WorldEnvironment == null) return;
 		// As a bonus we also update ambient color for you
 		var AC = world.m_WorldEnvironment.GetAmbientColor();
 		// Always loop over the full array
 		// Keep work for each item to a minimum
+		int disabled = 0;
+		// Sort the cameras according to their last render time
+		Cameras.Sort((a, b) => a.LastRendered.CompareTo(b.LastRendered));
 		for (int i = 0; i < Cameras.Count; i++)
 		{
-			var throttle = Cameras[i];
+			IThrottleCam throttle = Cameras[i];
 			// Implementer should do the caching!
 			Camera cam = throttle?.GetCameraCached();
 			// Check if we got any surprises?
@@ -60,12 +63,15 @@ static class ThrottleCams
 				{
 					// Disable this frame
 					cam.enabled = false;
+					disabled++;
+
 				}
 			}
 			else
 			{
 				// Disable this frame
 				cam.enabled = false;
+				disabled++;
 			}
 		}
 	}

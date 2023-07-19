@@ -5,6 +5,7 @@ using UnityEngine;
 
 public interface IThrottleCam
 {
+    float LastRendered { get; set; }
     bool ShouldRenderThisFrame();
     void WasRenderedThisFrame();
     Camera GetCameraCached();

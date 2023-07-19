@@ -126,12 +126,9 @@ public class BlockRemoteTurret : BlockPowered
 				var type = kv.Key;
 				var skill = kv.Value.Item1;
 				var level = kv.Value.Item2;
-
-				if (player.Progression.ProgressionValues.Contains(skill))
-				{
-					PlayerPerks.Add(type, new Tuple<ProgressionValue, int>(
-						player.Progression.GetProgressionValue(skill), level));
-				}
+				var progression = player.Progression.GetProgressionValue(skill);
+				if (progression != null) PlayerPerks.Add(type, new
+					Tuple<ProgressionValue, int>(progression, level));
 			}
 			Player = player;
 		}
@@ -162,16 +159,16 @@ public class BlockRemoteTurret : BlockPowered
 	public static BlockRemoteTurret BlockToOpen = null;
 	public static TileEntityPowered PanelToOpen = null;
 
-    public override bool OnBlockActivated(
-		int _indexInBlockActivationCommands,
+	public override bool OnBlockActivated(
+		string _commandName,
 		WorldBase world,
 		int cIdx,
 		Vector3i position,
 		BlockValue _blockValue,
 		EntityAlive player)
 	{
-		if (_indexInBlockActivationCommands == 0)
-        {
+		if (_commandName == "activate")
+		{
 			CurrentOpenBlock = null;
 			CurrentOpenPanel = null;
 			RemoteTurretUtils.CollectTurrets(world, cIdx,
@@ -213,7 +210,7 @@ public class BlockRemoteTurret : BlockPowered
 			// Success
 			return true;
 		}
-		else if (_indexInBlockActivationCommands == 1)
+		else if (_commandName == "take")
 		{
 			TakeItemWithTimer(cIdx, position, _blockValue, player);
 			return true;
@@ -343,8 +340,8 @@ public class BlockRemoteTurret : BlockPowered
 		base.OnBlockUnloaded(_world, _clrIdx, _blockPos, _blockValue);
 	}
 
-    public override void OnBlockRemoved(WorldBase world, Chunk _chunk, Vector3i _blockPos, BlockValue _blockValue)
-    {
+	public override void OnBlockRemoved(WorldBase world, Chunk _chunk, Vector3i _blockPos, BlockValue _blockValue)
+	{
 		if (Loaded.TryGetValue(_blockPos, out var panel))
 		{
 			panel.Destroy();
@@ -356,6 +353,6 @@ public class BlockRemoteTurret : BlockPowered
 			UpdateCoroutine = null;
 		}
 		base.OnBlockRemoved(world, _chunk, _blockPos, _blockValue);
-    }
+	}
 
 }

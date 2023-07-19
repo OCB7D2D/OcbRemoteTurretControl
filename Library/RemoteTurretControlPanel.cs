@@ -155,6 +155,7 @@ public class RemoteTurretPanel : PoweredScreenPanel
             {
                 // Fetch camera from potential new turret
                 var cam = parent.FindInChilds("camera");
+                // For fun try `Camera.main.transform`
                 Kamera.transform.SetParent(cam, false);
                 // Special check when previous camera was not powered
                 // and next one isn't either, force switch of effect to
@@ -231,14 +232,52 @@ public class RemoteTurretPanel : PoweredScreenPanel
         if (Kamera != null) return;
         GameObject go = new GameObject("Camera", typeof(Camera));
         Kamera = go.GetComponent<Camera>();
-        Kamera.nearClipPlane = 0.01f;
-        Kamera.depth = -10f;
-        Kamera.farClipPlane = 1000f;
-        Kamera.fieldOfView = 80f;
-        Kamera.cullingMask &= -513;
-        Kamera.cullingMask &= -1025;
-        Kamera.renderingPath = RenderingPath.DeferredShading;
-        Kamera.clearFlags = CameraClearFlags.SolidColor;
+        var main = Camera.main;
+
+        Kamera.allowHDR = main.allowHDR;
+        Kamera.allowMSAA = main.allowMSAA;
+
+        Kamera.nearClipPlane = main.nearClipPlane;
+        Kamera.depth = main.depth;
+        Kamera.farClipPlane = main.farClipPlane;
+        Kamera.fieldOfView = 65;
+
+        Kamera.cullingMask = main.cullingMask;
+
+        Kamera.opaqueSortMode = main.opaqueSortMode;
+        Kamera.overrideSceneCullingMask = main.overrideSceneCullingMask;
+        Kamera.depthTextureMode = main.depthTextureMode;
+        
+        Kamera.renderingPath = main.renderingPath;
+
+        Kamera.scene = main.scene;
+        Kamera.gateFit = main.gateFit;
+
+        Kamera.cameraType = main.cameraType;
+
+        Kamera.backgroundColor = main.backgroundColor;
+
+        Kamera.clearFlags = main.clearFlags;
+        Kamera.clearStencilAfterLightingPass = main.clearStencilAfterLightingPass;
+        Kamera.useOcclusionCulling = main.useOcclusionCulling;
+        Kamera.sensorSize = main.sensorSize;
+
+        // Kamera.focusDistance = main.focusDistance;
+        Kamera.focalLength = main.focalLength;
+
+        Kamera.forceIntoRenderTexture = true;
+
+
+        // Kamera.nearClipPlane = 0.01f;
+        // Kamera.depth = -10f;
+        // Kamera.farClipPlane = 1000f;
+        // Kamera.fieldOfView = 80f;
+
+        // Kamera.depthTextureMode = DepthTextureMode.DepthNormals;
+        // Kamera.cullingMask &= -513;
+        // Kamera.cullingMask &= -1025;
+        // Kamera.renderingPath = RenderingPath.Forward;
+        // Kamera.clearFlags = CameraClearFlags.SolidColor;
         Kamera.enabled = false; // Disable initially
         // Fixing if camera has disappeared
         // Otherwise shows black screen only

@@ -2,16 +2,19 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: TvScreenGuppyMaterial
   m_Shader: {fileID: 4800000, guid: 877e0d07713d123419390e812f0af018, type: 3}
-  m_ShaderKeywords: _EMISSION _METALLICGLOSSMAP
+  m_ValidKeywords: []
+  m_InvalidKeywords:
+  - _EMISSION
+  - _METALLICGLOSSMAP
   m_LightmapFlags: 1
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -71,6 +74,7 @@ Material:
         m_Texture: {fileID: 2800000, guid: 2875adafefbd84247b3eff38b0b50348, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Alpha: 0.8
     - _BumpScale: 1
@@ -84,7 +88,7 @@ Material:
     - _EmissionOpacity: 1
     - _FakeThickness: 0.688
     - _GlossMapScale: 0.605
-    - _Glossiness: 0.25
+    - _Glossiness: 0.85
     - _GlossyReflections: 1
     - _LabelGlossiness: 0.5
     - _LabelMetallic: 0

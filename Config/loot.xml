@@ -1,10 +1,5 @@
 <configs>
-
-	<append xpath="/lootcontainers/lootgroup[@name='schematicsElectrical']">
-		<item name="ocbRemoteTurretPanelSchematic" loot_prob_template="medLow"/>
+	<append xpath="/lootcontainers/lootgroup[@name='groupElectricalDevices']">
+		<item name="ocbRemoteTurretPanelVariantHelper" loot_prob_template="veryLow"/>
 	</append>
-	<append xpath="/lootcontainers/lootgroup[@name='schematicsToolsT2']">
-		<item name="ocbRemoteTurretPanelSchematic" loot_prob_template="low"/>
-	</append>
-
 </configs>

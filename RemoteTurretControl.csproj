@@ -2,6 +2,7 @@
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
+    <PATH_7D2D_MANAGED Condition=" '$(PATH_7D2D_MANAGED)' == '' ">..\..\7DaysToDie_Data\Managed</PATH_7D2D_MANAGED>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <BaseIntermediateOutputPath>build\obj\$(AssemblyName)</BaseIntermediateOutputPath>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
@@ -10,7 +11,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RemoteTurretControl</RootNamespace>
     <AssemblyName>RemoteTurretControl</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
     <TargetFrameworkProfile />
@@ -24,6 +25,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <PostBuildEvent>
+      copy /Y /B "$(AssemblyName).dll" "..\..\..\$(AssemblyName).dll"
+    </PostBuildEvent>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,8 +37,14 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <Prefer32Bit>false</Prefer32Bit>
+    <PostBuildEvent>
+      copy /Y /B "$(AssemblyName).dll" "..\..\..\$(AssemblyName).dll"
+    </PostBuildEvent>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="mscorlib">
+      <HintPath>$(PATH_7D2D_MANAGED)\mscorlib.dll</HintPath>
+    </Reference>
     <Reference Include="0Harmony">
       <HintPath>$(PATH_7D2D_MANAGED)\0Harmony.dll</HintPath>
     </Reference>
@@ -82,6 +92,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Harmony\ElectricityMultiDimFix.cs" />
     <Compile Include="Harmony\OcbRemoteTurret.cs" />
     <Compile Include="Library\BlockRemoteTurret.cs" />
     <Compile Include="Library\NetPackageTELockAll.cs" />
@@ -97,9 +108,9 @@
     <Compile Include="Library\XUI_PowerRangedTrapWindowGroup.cs" />
     <Compile Include="LibThrottleCams\ThrottleCams.cs" />
     <Compile Include="Utils\HarmonySerializer.cs" />
+    <Compile Include="Utils\ModXmlPatcher.cs" />
     <Content Include="Config\loot.xml" />
     <Content Include="Config\recipes.xml" />
-    <Content Include="Config\items.xml" />
     <Content Include="Config\progression.xml" />
     <Content Include="Config\XUi\windows.xml" />
     <Compile Include="Harmony\AssemblyInfo.cs" />

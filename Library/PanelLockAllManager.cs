@@ -36,7 +36,7 @@ static class PanelLockAllManager
 		if (SingletonMonoBehaviour<ConnectionManager>.Instance.IsServer)
 		{
 			foreach (var entry in entries)
-            {
+			{
 				TileEntity tile;
 				if (entry.Item3 == -1)
 				{

@@ -26,18 +26,18 @@ public class OcbRemoteTurret : IModApi
 
 	public void InitMod(Mod mod)
 	{
-		Log.Out("Loading OCB Remote Turret Control Patch: " + GetType().ToString());
-		var harmony = new Harmony(GetType().ToString());
+		Log.Out("OCB Harmony Patch: " + GetType().ToString());
+		Harmony harmony = new Harmony(GetType().ToString());
 		harmony.PatchAll(Assembly.GetExecutingAssembly());
 		// Register cam throttler for frame updates
 		ModEvents.UnityUpdate.RegisterHandler(
 			ThrottleCams.BeforeFrameUpdate);
 	}
 
-    // Fix vanilla "bug" where parent position would not be set
-    // We use it to also know grid at client side. Funny enough,
-    // without this fix it doesn't work on the server side!?
-    private static readonly FieldInfo FieldParentPosition = AccessTools
+	// Fix vanilla "bug" where parent position would not be set
+	// We use it to also know grid at client side. Funny enough,
+	// without this fix it doesn't work on the server side!?
+	private static readonly FieldInfo FieldParentPosition = AccessTools
 		.Field(typeof(TileEntityPowered), "parentPosition");
 
 	// Implement `OpenTileEntityUi` for `RemoteTurret`
