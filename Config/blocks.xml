@@ -97,11 +97,11 @@
 			<property name="ScreenShownWhen" value="Parented"/>
 
 			<property name="ScreenAlbedoColor" value="120,230,230,30"/>
-			<property name="ScreenEmissionColor" value="20,35,35,255"/>
+			<property name="ScreenEmissionColor" value="20,35,35,30"/>
 			<property name="ScreenAlbedoColorOn" value="80,140,140,220"/>
-			<property name="ScreenEmissionColorOn" value="80,140,140,255"/>
-			<property name="ScreenAlbedoColorCam" value="170,180,180,220"/>
-			<property name="ScreenEmissionColorCam" value="232,232,232,255"/>
+			<property name="ScreenEmissionColorOn" value="80,140,140,220"/>
+			<property name="ScreenAlbedoColorCam" value="170,180,180,232"/>
+			<property name="ScreenEmissionColorCam" value="192,192,192,192"/>
 			<property name="ScreenAlbedoColorEffect" value="80,140,140,220"/>
 			<property name="ScreenEmissionColorEffect" value="80,140,140,120"/>
 

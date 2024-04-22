@@ -90,8 +90,12 @@
     <Reference Include="UnityEngine.CoreModule">
       <HintPath>$(PATH_7D2D_MANAGED)\UnityEngine.CoreModule.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.Postprocessing.Runtime">
+      <HintPath>$(PATH_7D2D_MANAGED)\Unity.Postprocessing.Runtime.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Harmony\AddFogAndSkyToCams.cs" />
     <Compile Include="Harmony\ElectricityMultiDimFix.cs" />
     <Compile Include="Harmony\OcbRemoteTurret.cs" />
     <Compile Include="Library\BlockRemoteTurret.cs" />

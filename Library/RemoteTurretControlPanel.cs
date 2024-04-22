@@ -21,7 +21,7 @@ public class RemoteTurretPanel : PoweredScreenPanel
     private readonly Vector3i Position;
 
     // Reference to in-game screen overlay
-    private readonly MeshRenderer Monitor;
+    private readonly Renderer[] Renderers;
 
     // Remember original material textures
     private readonly Texture OldMainTex;
@@ -62,6 +62,39 @@ public class RemoteTurretPanel : PoweredScreenPanel
             +CamInterval * range);
     }
 
+    private Renderer MainRenderer => Renderers.Length > 0 ? Renderers[0] : null;
+
+    private void SetMaterialTexture(string name, Texture texture)
+    {
+        foreach (Renderer renderer in Renderers) 
+            renderer.material.SetTexture(name, texture);
+    }
+
+    private void SetMaterialColor(string name, Color color)
+    {
+        foreach (Renderer renderer in Renderers)
+            renderer.material.SetColor(name, color);
+    }
+
+    private void SetMaterialInt(string name, int value)
+    {
+        foreach (Renderer renderer in Renderers)
+            renderer.material.SetInt(name, value);
+    }
+
+    private void SetMaterialFloat(string name, float value)
+    {
+        foreach (Renderer renderer in Renderers)
+            renderer.material.SetFloat(name, value);
+    }
+
+    private void SetRenderersActive(bool enabled)
+    {
+        foreach (Renderer renderer in Renderers)
+            renderer.enabled = enabled;
+    }
+
+
     // Constructor 
     public RemoteTurretPanel(WorldBase world, int clrIdx, Vector3i pos, Transform monitor, BlockRemoteTurret block)
     {
@@ -70,26 +103,26 @@ public class RemoteTurretPanel : PoweredScreenPanel
         LastTick = GetRandomCamIntervalOffset(0.3f);
         World = world; ClrIdx = clrIdx; Position = pos;
         if (World == null) throw new Exception("No World");
-        Monitor = monitor?.GetComponent<MeshRenderer>();
-        if (Monitor == null) throw new Exception("No Monitor");
-        if (Monitor.material == null) throw new Exception("No Material");
+        Renderers = monitor?.GetComponentsInChildren<MeshRenderer>();
+        if (MainRenderer == null) throw new Exception("No Monitor");
+        if (MainRenderer.material == null) throw new Exception("No Material");
         // Store old texture to reset them later if required
         // Note: make sure to reset them on destruction
-        OldMainTex = Monitor.material.GetTexture("_MainTex");
-        OldEmissionMap = Monitor.material.GetTexture("_EmissionMap");
-        Monitor.material.SetColor("_ScreenColor", block.ScreenAlbedoColor);
-        Monitor.material.SetColor("_EmissionColor", block.ScreenEmissionColor);
-        Monitor.material.SetColor("_EffectColor1", block.ScreenEffectColor1);
-        Monitor.material.SetColor("_EffectColor2", block.ScreenEffectColor2);
-        Monitor.material.SetInt("_Mode", 1);
+        OldMainTex = MainRenderer.material.GetTexture("_MainTex");
+        OldEmissionMap = MainRenderer.material.GetTexture("_EmissionMap");
+        SetMaterialColor("_ScreenColor", block.ScreenAlbedoColor);
+        SetMaterialColor("_EmissionColor", block.ScreenEmissionColor);
+        SetMaterialColor("_EffectColor1", block.ScreenEffectColor1);
+        SetMaterialColor("_EffectColor2", block.ScreenEffectColor2);
+        SetMaterialInt("_Mode", 1);
     }
 
     // Called when unloaded
     public void Destroy()
     {
         IsActive = false; // Update throttled camera
-        Monitor.material.SetTexture("_MainTex", OldMainTex);
-        Monitor.material.SetTexture("_EmissionMap", OldEmissionMap);
+        SetMaterialTexture("_MainTex", OldMainTex);
+        SetMaterialTexture("_EmissionMap", OldEmissionMap);
         if (Texture) Texture.Release();
         if (Kamera) UnityEngine.Object.DestroyImmediate(Kamera);
         if (Texture) UnityEngine.Object.DestroyImmediate(Texture);
@@ -104,7 +137,7 @@ public class RemoteTurretPanel : PoweredScreenPanel
     public void Tick(bool active)
     {
         // May be true once removed
-        active &= Monitor != null;
+        active &= MainRenderer != null;
         // Do nothing if still inactive
         if (!isActive && !active) return;
         // Set active flag
@@ -164,10 +197,10 @@ public class RemoteTurretPanel : PoweredScreenPanel
                 {
                     // Forces a material channel/effect switch
                     // Note: ensure to have more than 1 effect
-                    int mode = Monitor.material.GetInt("_Mode");
+                    int mode = MainRenderer.material.GetInt("_Mode");
                     int changed = mode; while (changed == mode)
                         changed = UnityEngine.Random.Range(2, 4);
-                    Monitor.material.SetInt("_Mode", changed);
+                    SetMaterialInt("_Mode", changed);
                 }
                 // Update the power state after our special check
                 IsCamPowered = RemoteTurrets[CurrentCam].IsPowered;
@@ -188,7 +221,7 @@ public class RemoteTurretPanel : PoweredScreenPanel
         // Update monitor state and material
         MonitorState = CurrentScreenState();
         // Fully enable/disable the monitor mesh according to condition
-        Monitor.enabled = CurrentScreenVisibility(Block.ScreenShownWhen);
+        SetRenderersActive(CurrentScreenVisibility(Block.ScreenShownWhen));
 
         // Check for state changes
         CheckScreenChanges();
@@ -221,7 +254,7 @@ public class RemoteTurretPanel : PoweredScreenPanel
                 emission.r *= 1f + factor * 0.65f;
                 emission.g *= 1f + factor * 0.15f;
                 emission.b *= 1f + factor * 0.05f;
-                Monitor.material.SetColor("_EmissionColor", emission);
+                SetMaterialColor("_EmissionColor", emission);
             }
         }
     }
@@ -267,6 +300,7 @@ public class RemoteTurretPanel : PoweredScreenPanel
 
         Kamera.forceIntoRenderTexture = true;
 
+        AddFogAndSkyToCams.PatchCamera(Kamera);
 
         // Kamera.nearClipPlane = 0.01f;
         // Kamera.depth = -10f;
@@ -284,8 +318,8 @@ public class RemoteTurretPanel : PoweredScreenPanel
         if (Texture) IsMonitorDirty = true;
         Texture = CreateRenderTexture();
         Kamera.targetTexture = Texture; // Maybe re-use
-        Monitor.material.SetTexture("_MainTex", Texture);
-        Monitor.material.SetTexture("_EmissionMap", Texture);
+        SetMaterialTexture("_MainTex", Texture);
+        SetMaterialTexture("_EmissionMap", Texture);
     }
 
     // Scale down a little from full-screen size
@@ -319,37 +353,37 @@ public class RemoteTurretPanel : PoweredScreenPanel
         switch (MonitorState)
         {
             case ScreenState.Unpowered:
-                Monitor.material.SetTexture("_MainTex", OldMainTex);
-                Monitor.material.SetTexture("_EmissionMap", OldEmissionMap);
-                Monitor.material.SetColor("_ScreenColor", Block.ScreenAlbedoColor);
-                Monitor.material.SetColor("_EmissionColor", Block.ScreenEmissionColor);
-                Monitor.material.SetInt("_Mode", 1);
+                SetMaterialTexture("_MainTex", OldMainTex);
+                SetMaterialTexture("_EmissionMap", OldEmissionMap);
+                SetMaterialColor("_ScreenColor", Block.ScreenAlbedoColor);
+                SetMaterialColor("_EmissionColor", Block.ScreenEmissionColor);
+                SetMaterialInt("_Mode", 1);
                 break;
             case ScreenState.Powered:
-                Monitor.material.SetTexture("_MainTex", OldMainTex);
-                Monitor.material.SetTexture("_EmissionMap", OldEmissionMap);
-                Monitor.material.SetColor("_ScreenColor", Block.ScreenAlbedoColorOn);
-                Monitor.material.SetColor("_EmissionColor", Block.ScreenEmissionColorOn);
-                Monitor.material.SetInt("_Mode", 1);
+                SetMaterialTexture("_MainTex", OldMainTex);
+                SetMaterialTexture("_EmissionMap", OldEmissionMap);
+                SetMaterialColor("_ScreenColor", Block.ScreenAlbedoColorOn);
+                SetMaterialColor("_EmissionColor", Block.ScreenEmissionColorOn);
+                SetMaterialInt("_Mode", 1);
                 break;
             case ScreenState.CamView:
-                Monitor.material.SetTexture("_MainTex", Texture);
-                Monitor.material.SetTexture("_EmissionMap", Texture);
-                Monitor.material.SetColor("_ScreenColor", Block.ScreenAlbedoColorCam);
-                Monitor.material.SetColor("_EmissionColor", Block.ScreenEmissionColorCam);
-                Monitor.material.SetInt("_Mode", 1);
+                SetMaterialTexture("_MainTex", Texture);
+                SetMaterialTexture("_EmissionMap", Texture);
+                SetMaterialColor("_ScreenColor", Block.ScreenAlbedoColorCam);
+                SetMaterialColor("_EmissionColor", Block.ScreenEmissionColorCam);
+                SetMaterialInt("_Mode", 1);
                 break;
             case ScreenState.CamEffect:
-                Monitor.material.SetTexture("_MainTex", Texture);
-                Monitor.material.SetTexture("_EmissionMap", Texture);
-                Monitor.material.SetColor("_ScreenColor", Block.ScreenAlbedoColorEffect);
-                Monitor.material.SetColor("_EmissionColor", Block.ScreenEmissionColorEffect);
+                SetMaterialTexture("_MainTex", Texture);
+                SetMaterialTexture("_EmissionMap", Texture);
+                SetMaterialColor("_ScreenColor", Block.ScreenAlbedoColorEffect);
+                SetMaterialColor("_EmissionColor", Block.ScreenEmissionColorEffect);
                 var seed = UnityEngine.Random.Range(600f, 1200f);
-                Monitor.material.SetFloat("_Seed", seed);
-                int mode = Monitor.material.GetInt("_Mode");
+                SetMaterialFloat("_Seed", seed);
+                int mode = MainRenderer.material.GetInt("_Mode");
                 int changed = mode; while (changed == mode)
                     changed = UnityEngine.Random.Range(2, 4);
-                Monitor.material.SetInt("_Mode", changed);
+                SetMaterialInt("_Mode", changed);
                 break;
         }
     }
