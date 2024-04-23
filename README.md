@@ -159,6 +159,12 @@ Further away you may only get an update each 1 or 2 seconds.
 
 ## Changelog
 
+### Version 0.2.1
+
+- Add fog and sky to all electric cameras
+- Split holo-screen for proper depth order
+- Add back transparency for holo-screen
+
 ### Version 0.2.0
 
 - Update compatibility for 7D2D A21.0(b324)

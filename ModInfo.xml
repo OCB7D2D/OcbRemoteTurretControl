@@ -5,5 +5,5 @@
 	<Description value="Connect and control remote turrets and view their cameras" />
 	<Website value="https://github.com/OCB7D2D/OcbRemoteTurretControl" />
 	<Author value="ocbMaurice" />
-	<Version value="0.2.0" />
+	<Version value="0.2.1" />
 </xml>
