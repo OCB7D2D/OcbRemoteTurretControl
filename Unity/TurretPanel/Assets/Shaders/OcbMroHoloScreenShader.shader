@@ -9,6 +9,7 @@
         _Color("Tint Color", Color) = (1,1,1,1)
         // Cannot update color without changing all tints
         _ScreenColor("Albedo Color", Color) = (1,1,1,0.5)
+        _ScreenSize("Screen Pixels", Vector) = (640,360,0,0)
         _MainTex("Albedo (RGB)", 2D) = "white" {}
         _Alpha("Global Alpha", Range(0, 1)) = 0
         // Use one single texture to optimize memory
@@ -29,14 +30,14 @@
     SubShader
     {
         Tags {
-            "Queue" = "AlphaTest+2"
+            "Queue" = "Transparent"
             "IgnoreProjector" = "True"
-            "RenderType" = "Opaque"
+            "RenderType" = "Transparent"
             "PreviewType" = "Plane"
         }
 
         // Blend SrcAlpha OneMinusSrcAlpha, SrcAlpha OneMinusSrcAlpha
-        Blend One OneMinusSrcAlpha, SrcAlpha OneMinusSrcAlpha
+        // Blend One OneMinusSrcAlpha, SrcAlpha OneMinusSrcAlpha
 
         LOD 200
 
@@ -44,7 +45,7 @@
         CGPROGRAM
         // Physically based Standard lighting model, and enable shadows on all light types
         // Also enabling alpha in order to get transparency working
-        #pragma surface surf Standard fullforwardshadows
+        #pragma surface surf Standard fullforwardshadows alpha:premul
         // Use shader model 3.0 target, to get nicer looking lighting
         #pragma target 3.0
         // Include the actual surface shader

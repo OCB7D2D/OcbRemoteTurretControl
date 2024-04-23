@@ -109,4 +109,5 @@ Material:
     - _EffectColor2: {r: 0, g: 0.6862745, b: 0, a: 1}
     - _EmissionColor: {r: 1, g: 1, b: 1, a: 0.827451}
     - _ScreenColor: {r: 0.84705883, g: 0.9098039, b: 0.9098039, a: 1}
+    - _ScreenSize: {r: 384, g: 256, b: 0, a: 0}
   m_BuildTextureStacks: []

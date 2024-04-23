@@ -2,6 +2,7 @@
 #include "Include/MroIncludeSurface.cginc"
 
 int _Mode;
+float2 _ScreenSize;
 float4 _ScreenColor;
 float4 _EffectColor1;
 float4 _EffectColor2;
@@ -24,7 +25,7 @@ float4 GetColor(int mode, float2 uv)
     {
         // Render main texture but fully opaque
         case 1: return float4(tex2D(_MainTex, uv).rgb, 1);
-        case 2: return StaticNoise(uv, _Time.w, _EffectColor1);
+        case 2: return StaticNoise(uv, _Time.y, _EffectColor1);
         case 3: return MatrixNoise(uv, _Time.w, _EffectColor2,
             128, 20, float2(128, 38));
         default: return tex2D(_MainTex, uv);
@@ -46,7 +47,7 @@ void surf (Input IN, inout SurfaceOutputStandard o)
     // Emission comes from effect tinted by screen color
     o.Emission = max(screen.rgb * _ScreenColor.a,
             tex2D(_EmissionMap, IN.uv_EmissionMap) * _EmissionColor.a)
-        * _EmissionColor.rgb * _ScreenColor.rgb;
+        * _EmissionColor.rgb; // * _ScreenColor.rgb;
     // Multiply with global value
     o.Alpha = _ScreenColor.a * _Alpha;
 }

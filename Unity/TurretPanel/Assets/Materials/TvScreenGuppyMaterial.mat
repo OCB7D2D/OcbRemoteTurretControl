@@ -24,7 +24,7 @@ Material:
     m_TexEnvs:
     - _BumpMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: -1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
         m_Texture: {fileID: 0}
@@ -40,20 +40,20 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _EmissionMap:
         m_Texture: {fileID: 2800000, guid: 3d5d174e7b784c348b56cd3c89da1382, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Scale: {x: -1, y: 1}
+        m_Offset: {x: 1, y: 0}
     - _MRO:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MROMap:
         m_Texture: {fileID: 0}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Scale: {x: -1, y: 1}
+        m_Offset: {x: 1, y: 0}
     - _MainTex:
         m_Texture: {fileID: 2800000, guid: 3d5d174e7b784c348b56cd3c89da1382, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
+        m_Scale: {x: -1, y: 1}
+        m_Offset: {x: 1, y: 0}
     - _MetallicGlossMap:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
@@ -76,7 +76,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Alpha: 0.8
+    - _Alpha: 1
     - _BumpScale: 1
     - _ColorMask: 15
     - _ColorOpacity: 1
@@ -125,6 +125,7 @@ Material:
     - _EffectColor2: {r: 0.0627451, g: 0.5019608, b: 0.0627451, a: 1}
     - _EmissionColor: {r: 0.3137255, g: 0.54901963, b: 0.54901963, a: 1}
     - _ScreenColor: {r: 0.3137255, g: 0.54901963, b: 0.54901963, a: 1}
+    - _ScreenSize: {r: 1024, g: 512, b: 0, a: 0}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
     - _Specular: {r: 0, g: 0, b: 0, a: 0}
     - _ThickColor: {r: 0.8396226, g: 0.14257741, b: 0.14257741, a: 1}

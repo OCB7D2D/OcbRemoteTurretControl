@@ -2,15 +2,13 @@ float StaticRandom(fixed2 p, float ta, float tb) {
     return frac(sin(p.x * ta + p.y * tb) * 5678.);
 }
 
-float4 StaticNoise(float2 uv, float seed, float4 color)
+float4 StaticNoise(float2 uv, float time, float4 color)
 {
-    // if (tex2D(_MainTex, uv).r < 0.001) return 0;
-    // Albedo comes from noise generator
-    float t = seed / 1000 + 1576.42f;
+    float t = time % 1024 + 12.756394;
     float ta = t * .654321;
-    float2 res = float2(600, 200);
+    float tb = t * ta * .123456;
+    float2 res = _ScreenSize;
     uv = floor(uv * res) / res;
-    float noise = StaticRandom(uv, ta,
-        t * (ta * .123456));
+    float noise = StaticRandom(uv, ta, tb);
     return color * noise;
 }
