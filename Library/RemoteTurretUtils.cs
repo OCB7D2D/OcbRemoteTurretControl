@@ -23,7 +23,6 @@ static class RemoteTurretUtils
 
 	public static void CollectTurrets(
 		WorldBase world,
-		int cIdx,
 		Vector3i blockPos,
 		List<TileEntityPowered> ControlPanels,
 		List<TileEntityPoweredRangedTrap> RemoteTurrets,
@@ -37,7 +36,7 @@ static class RemoteTurretUtils
 			var queued = queue.Dequeue();
 			var position = queued.Item1;
 			var depth = queued.Item2;
-			if (world.GetTileEntity(cIdx, position) is TileEntityPowered tep)
+			if (world.GetTileEntity(position) is TileEntityPowered tep)
 			{
 				// Skip other remote turret blocks (only collect local turrets)
 				if (tep.blockValue.Block is BlockRemoteTurret)

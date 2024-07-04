@@ -112,7 +112,6 @@
     <Compile Include="Library\XUI_PowerRangedTrapWindowGroup.cs" />
     <Compile Include="LibThrottleCams\ThrottleCams.cs" />
     <Compile Include="Utils\HarmonySerializer.cs" />
-    <Compile Include="Utils\ModXmlPatcher.cs" />
     <Content Include="Config\loot.xml" />
     <Content Include="Config\recipes.xml" />
     <Content Include="Config\progression.xml" />

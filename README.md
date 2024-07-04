@@ -157,7 +157,22 @@ which means that screens the player stands closer are updated more
 frequently. When very close, up to same fps as the main game runs.
 Further away you may only get an update each 1 or 2 seconds.
 
+## Download and Install
+
+End-Users are encouraged to download my mods from [NexusMods][5].  
+Every download there helps me to buy stuff for mod development.
+
+Otherwise please use one of the [official releases][6] here.  
+Only clone or download the repo if you know what you do!
+
+[5]: https://www.nexusmods.com/7daystodie/mods/2279
+[6]: https://github.com/OCB7D2D/OcbRemoteTurretControl/releases
+
 ## Changelog
+
+### Version 0.3.0
+
+- First compatibility with V1.0 (exp)
 
 ### Version 0.2.1
 
@@ -187,6 +202,5 @@ Further away you may only get an update each 1 or 2 seconds.
 
 - Initial working version
 
-## Compatibility
-
-Developed initially for version a20.5(b2), updated through A21.0(b324).
+[1]:
+[2]:

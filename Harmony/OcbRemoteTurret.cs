@@ -177,20 +177,20 @@ public class OcbRemoteTurret : IModApi
 		}
 	}
 
-	/*************************************************************************/
-	// Below is a few advanced transpiler patches
-	// Inserting `UpgradeVariantHelper` into handler
-	/*************************************************************************/
+    /*************************************************************************/
+    // Below is a few advanced transpiler patches
+    // Inserting `UpgradeVariantHelper` into handler
+    /*************************************************************************/
 
-	// Used by patched function below
-	static void UpgradeVariantHelper(ItemStack stack)
+    // Used by patched function below
+    private static void UpgradeVariantHelper(ItemStack stack)
 	{
 		// Check if we are dealing with a block
 		if (stack.itemValue.type < Block.ItemsStartHere)
 		{
 			// Check if the block has `ReturnVariantHelper` set
 			if (Block.list[stack.itemValue.type].Properties.Values
-				.TryGetString("ReturnVariantHelper", out string variant))
+				.TryGetValue("ReturnVariantHelper", out string variant))
 			{
 				// Upgrade `itemValue` to variant helper block type
 				if (Block.GetBlockByName(variant) is Block helper)

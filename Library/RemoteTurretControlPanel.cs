@@ -14,9 +14,6 @@ public class RemoteTurretPanel : PoweredScreenPanel
     // Just a reference to our world
     private readonly WorldBase World;
 
-    // Never know what this does!?
-    private readonly int ClrIdx = 0;
-
     // Position of the remote turret control panel
     private readonly Vector3i Position;
 
@@ -96,12 +93,12 @@ public class RemoteTurretPanel : PoweredScreenPanel
 
 
     // Constructor 
-    public RemoteTurretPanel(WorldBase world, int clrIdx, Vector3i pos, Transform monitor, BlockRemoteTurret block)
+    public RemoteTurretPanel(WorldBase world, Vector3i pos, Transform monitor, BlockRemoteTurret block)
     {
         Block = block; // Set as already as possible
         if (block == null) throw new Exception("No Block");
         LastTick = GetRandomCamIntervalOffset(0.3f);
-        World = world; ClrIdx = clrIdx; Position = pos;
+        World = world; Position = pos;
         if (World == null) throw new Exception("No World");
         Renderers = monitor?.GetComponentsInChildren<MeshRenderer>();
         if (MainRenderer == null) throw new Exception("No Monitor");
@@ -162,7 +159,7 @@ public class RemoteTurretPanel : PoweredScreenPanel
             // Gather all connected turrets
             // Does so by following wires
             RemoteTurretUtils.CollectTurrets(
-                World, ClrIdx, Position,
+                World, Position,
                 ControlPanels, RemoteTurrets);
             // Reset view index
             CurrentCam = 0;

@@ -35,9 +35,9 @@ public class BlockRemoteTurret : BlockPowered
 	public static TileEntityPowered LastPanelOpen = null;
 	// public BlockRemoteTurret() => IsRandomlyTick = false;
 
-	private Dictionary<string, Tuple<string, int>> AmmoPerks
+	private readonly Dictionary<string, Tuple<string, int>> AmmoPerks
 		= new Dictionary<string, Tuple<string, int>>();
-	private Dictionary<string, Tuple<ProgressionValue, int>> PlayerPerks
+	private readonly Dictionary<string, Tuple<ProgressionValue, int>> PlayerPerks
 		= new Dictionary<string, Tuple<ProgressionValue, int>>();
 
 	// Key-Mappings to switch turret cameras
@@ -95,12 +95,12 @@ public class BlockRemoteTurret : BlockPowered
 		KeyMapPrev = KeyCode.A; KeyMapNext = KeyCode.D;
 		Properties.ParseEnum("ScreenKeyMapPrev", ref KeyMapPrev);
 		Properties.ParseEnum("ScreenKeyMapNext", ref KeyMapNext);
-		if (Properties.Values.TryGetString("AmmoPerks", out string ammos))
+		if (Properties.Values.TryGetValue("AmmoPerks", out string ammos))
 		{
 			// Note: we don't allow whitespace!?
 			foreach (var ammo in ammos.Split(','))
 			{
-				if (Properties.Values.TryGetString(ammo + "Perk", out string skill))
+				if (Properties.Values.TryGetValue(ammo + "Perk", out string skill))
 				{
 					int minLevel = 0;
 					Properties.ParseInt(ammo + "PerkLevel", ref minLevel);
@@ -160,31 +160,33 @@ public class BlockRemoteTurret : BlockPowered
 	public static TileEntityPowered PanelToOpen = null;
 
 	public override bool OnBlockActivated(
-		string _commandName,
+        string _commandName,
 		WorldBase world,
 		int cIdx,
 		Vector3i position,
 		BlockValue _blockValue,
-		EntityAlive player)
+		EntityPlayerLocal player)
 	{
 		if (_commandName == "activate")
 		{
 			CurrentOpenBlock = null;
 			CurrentOpenPanel = null;
-			RemoteTurretUtils.CollectTurrets(world, cIdx,
+			RemoteTurretUtils.CollectTurrets(world,
 				position, ControlPanels, RemoteTurrets);
 			var te = world.GetTileEntity(cIdx, position);
 			if (!(te is TileEntityPowered tep))
 			{
-				GameManager.ShowTooltip(player as EntityPlayerLocal,
-					Localization.Get("ttNoTurretConnected"), string.Empty, "ui_denied");
+				GameManager.ShowTooltip(player,
+					Localization.Get("ttNoTurretConnected"),
+					string.Empty, "ui_denied");
 				return false;
 			}
 			// Check if panel is powered and has turrets
 			if (!tep.IsPowered || RemoteTurrets.Count == 0)
 			{
-				GameManager.ShowTooltip(player as EntityPlayerLocal,
-					Localization.Get("ttNoTurretConnected"), string.Empty, "ui_denied");
+				GameManager.ShowTooltip(player,
+					Localization.Get("ttNoTurretConnected"),
+					string.Empty, "ui_denied");
 				return false;
 			}
 			// Set `OnOpen` state
@@ -237,7 +239,7 @@ public class BlockRemoteTurret : BlockPowered
 		return true;
 	}
 
-	private BlockActivationCommand[] cmds = new BlockActivationCommand[2]
+	private new readonly BlockActivationCommand[] cmds = new BlockActivationCommand[2]
 	{
 		new BlockActivationCommand("activate", "tool", true),
 		new BlockActivationCommand("take", "hand", false)
@@ -279,7 +281,7 @@ public class BlockRemoteTurret : BlockPowered
 	/****************************************************************************/
 
 	IEnumerator UpdateCoroutine = null;
-	Dictionary<Vector3i, RemoteTurretPanel> Loaded
+    readonly Dictionary<Vector3i, RemoteTurretPanel> Loaded
 		= new Dictionary<Vector3i, RemoteTurretPanel>();
 
 	private IEnumerator UpdateNext()
@@ -312,15 +314,15 @@ public class BlockRemoteTurret : BlockPowered
 	}
 
 	public override void OnBlockEntityTransformBeforeActivated(WorldBase _world,
-		Vector3i _blockPos, int _cIdx, BlockValue _blockValue, BlockEntityData _ebcd)
+		Vector3i _blockPos, BlockValue _blockValue, BlockEntityData _ebcd)
 	{
-		base.OnBlockEntityTransformBeforeActivated(_world, _blockPos, _cIdx, _blockValue, _ebcd);
+		base.OnBlockEntityTransformBeforeActivated(_world, _blockPos, _blockValue, _ebcd);
 		if (Loaded.Count == 0)
 		{
 			UpdateCoroutine = UpdateNext();
 			GameManager.Instance.StartCoroutine(UpdateCoroutine);
 		}
-		Loaded.Add(_blockPos, new RemoteTurretPanel(_world, _cIdx, _blockPos,
+		Loaded.Add(_blockPos, new RemoteTurretPanel(_world, _blockPos,
 			_ebcd.transform.Find("Screen"), this));
 	}
 

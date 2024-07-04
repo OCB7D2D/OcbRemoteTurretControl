@@ -27,7 +27,7 @@ public class XUI_PowerRemoteTurretPanel : XUiC_PowerRangedTrapWindowGroup
     public TileEntityPowered LastPanel => BlockRemoteTurret.LastPanelOpen;
 
     // Reference to the camera preview window
-    private XUiC_CameraWindow cameraWindowPreview;
+    // private XUiC_CameraWindow cameraWindowPreview;
 
     // Current slot we are viewing
     // We always have a lock on it
@@ -35,13 +35,6 @@ public class XUI_PowerRemoteTurretPanel : XUiC_PowerRangedTrapWindowGroup
 
     private int LastSlotLocked = -1;
     private bool RequestPending = false;
-
-    public override void Init()
-    {
-        base.Init();
-        var preview = GetChildById("windowPowerCameraControlPreview");
-        cameraWindowPreview = preview as XUiC_CameraWindow;
-    }
 
     // Coroutine to close instantly
     // Needed to give a little timeout
@@ -185,7 +178,7 @@ public class XUI_PowerRemoteTurretPanel : XUiC_PowerRangedTrapWindowGroup
         ControlPanels.Clear();
     }
 
-    private void TileEntityDestroyed(TileEntity te)
+    private void TileEntityDestroyed(ITileEntity te)
     {
         Destroy();
     }
@@ -300,9 +293,9 @@ public class XUI_PowerRemoteTurretPanel : XUiC_PowerRangedTrapWindowGroup
 
     static readonly FieldInfo FieldLockedTileEntities = AccessTools.Field(typeof(GameManager), "lockedTileEntities");
 
-    public static Dictionary<TileEntity, int> GetServerLocks()
+    public static Dictionary<ITileEntity, int> GetServerLocks()
     {
-        return (Dictionary<TileEntity, int>)FieldLockedTileEntities.GetValue(GameManager.Instance);
+        return (Dictionary<ITileEntity, int>)FieldLockedTileEntities.GetValue(GameManager.Instance);
     }
 
     // Call as a remote function call to acquire new and release old lock
