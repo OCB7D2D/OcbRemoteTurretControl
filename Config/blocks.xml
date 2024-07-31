@@ -1,4 +1,4 @@
-<configs patcher-version="1">
+<configs>
 	<append xpath="/blocks">
 		<block name="ocbRemoteTurretPanelMumpfy">
 			<property name="Extends" value="controlPanelBase04"/>
