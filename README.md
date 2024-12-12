@@ -170,6 +170,10 @@ Only clone or download the repo if you know what you do!
 
 ## Changelog
 
+### Version 0.3.2
+
+- Recompiled for V1.2 stable (b27)
+
 ### Version 0.3.1
 
 - Recompiled for V1.0 stable (b333)
