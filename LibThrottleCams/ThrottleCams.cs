@@ -17,7 +17,7 @@ static class ThrottleCams
 
 	// Should be called before frame updates by unity
 	// Simply register it into `ModEvents.UnityUpdate`
-	public static void BeforeFrameUpdate()
+	public static void BeforeFrameUpdate(ref ModEvents.SUnityUpdateData _data)
 	{
 		int rendered = 0;
 		if (Cameras == null) return;
