@@ -1,4 +1,4 @@
-# OCB Remote Turret Control Mod - 7 Days to Die (V2.0) Addon
+# OCB Remote Turret Control Mod - 7 Days to Die (V2.1) Addon
 
 Introduces a new control panel block that connects with powered turrets.
 Once the control panel is opened, you can switch between turrets.
