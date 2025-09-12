@@ -120,6 +120,8 @@ public class RemoteTurretPanel : PoweredScreenPanel
         IsActive = false; // Update throttled camera
         SetMaterialTexture("_MainTex", OldMainTex);
         SetMaterialTexture("_EmissionMap", OldEmissionMap);
+        if (Kamera.activeTexture) UnityEngine.Object.DestroyImmediate(Kamera.activeTexture);
+        if (Kamera.targetTexture) UnityEngine.Object.DestroyImmediate(Kamera.targetTexture);
         if (Texture) Texture.Release();
         if (Kamera) UnityEngine.Object.DestroyImmediate(Kamera);
         if (Texture) UnityEngine.Object.DestroyImmediate(Texture);
